@@ -1,0 +1,1 @@
+export const googleURL="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.iconfinder.com%2Ficons%2F7123953%2Flogo_google_g_icon&psig=AOvVaw0v1tE35e48CeK_At25tqGk&ust=1734639105280000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCIji2bKQsooDFQAAAAAdAAAAABAK";
