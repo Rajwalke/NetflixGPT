@@ -1,8 +1,19 @@
+/* eslint-disable react/react-in-jsx-scope */
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Body from "./components/Body";
 import Browser from "./components/Browser";
+import { addUser,removeUser } from "./utils/userSlice";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import './App.css';
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import { useEffect } from "react";
+import app from "./utils/firebase";
 const App=()=> {
+
+//  const nevigate=useNavigate();
+
+
   const appRouter=createBrowserRouter([
       {
         path:"/",
@@ -27,10 +38,32 @@ const App=()=> {
     },
   }
 )
+
+useEffect(()=>{
+  const auth = getAuth(app);
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const {uid,email,displayName} = user;
+      appStore.dispatch(addUser({uid:uid,email:email,displayName:displayName}));
+      // nevigate("/browser");
+
+      // ...
+    } else {
+      appStore.dispatch(removeUser());
+      // nevigate("/browser");
+      // User is signed out
+      // ...
+    }
+  });
+
+},[])
+
   return (
+    <Provider store={appStore}>
     <div className="">
       <RouterProvider router={appRouter}/>
     </div>
+    </Provider>
   );
 }
  

@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import Header from "./Header"
 import Login from "./Login"
 

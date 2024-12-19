@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 const Header=()=>{
     return(
         <div className="p-5 z-50 w-full absolute bg-gradient-to-b from-gray-950">

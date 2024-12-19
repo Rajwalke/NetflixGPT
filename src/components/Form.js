@@ -1,19 +1,28 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/react-in-jsx-scope */
 // import userEvent from "@testing-library/user-event";
 import { useRef, useState } from "react";
 import { validation } from "../utils/validationcondition.js";
 import app from "../utils/firebase.js";
+// import { useDispatch } from "react-redux";
+// import { addUser } from "../utils/userSlice.js";
 import { getAuth,signInWithPopup,GoogleAuthProvider , createUserWithEmailAndPassword ,signInWithEmailAndPassword} from "firebase/auth";
-import { googleURL } from "../utils/image.js";
+import { useNavigate } from "react-router-dom";
+// import { googleURL } from "../utils/image.js";
 // import { auth } from "../utils/firebase.js";
 const Form=()=>{
+    // const dispatchItem=useDispatch(null);
     const [newuser,setnewuser]=useState(true);
     const [username,setusername]=useState("");
+    const navigate=useNavigate();
     // const [email,setemail]=useState("");
     // const [password,setpassword]=useState("");
     const [mobileno,setmobileno]=useState("")
     const [validationMessage,setvalidationMessage]=useState(null);
     const email=useRef(null);
     const password=useRef(null);
+
+    
     const googlevaildation=()=>{
         const provider = new GoogleAuthProvider();
 
@@ -27,6 +36,7 @@ const Form=()=>{
             // The signed-in user info.
             const user = result.user;
             setvalidationMessage("Validation with google")
+            navigate("/browser")
             // IdP data available using getAdditionalUserInfo(result)
             // ...
           }).catch((error) => {
@@ -39,6 +49,7 @@ const Form=()=>{
             const credential = GoogleAuthProvider.credentialFromError(error);
             // ...
           });
+          
     
     }
     const checktheValidity=()=>{
@@ -52,16 +63,20 @@ const Form=()=>{
         
         if(newuser){
             // sign up logic
-
+            console.log("Im not in error")
              const auth = getAuth(app);
             createUserWithEmailAndPassword(auth, email.current.value,password.current.value)
               .then((userCredential) => {
                 // Signed up 
                 const user = userCredential.user;
-                console.log("user",user);
+                console.log(user);
+                // dispatchItem(addUser({uid:user.uid, email:user.email,apiKey:user.apiKey}));
+                navigate("/browser");
+                console.log("naviagte to the browser");
                 // ...
               })
               .catch((error) => {
+                console.log("im in eror")
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode+" - "+errorMessage);
@@ -80,6 +95,8 @@ const Form=()=>{
                 const user = userCredential.user;
                 console.log("user",user);
                 setvalidationMessage("user")
+                // dispatchItem(addUser(user));
+                navigate("/browser")
                 // ...
               })
               .catch((error) => {
@@ -99,8 +116,9 @@ const Form=()=>{
     }
     return(
         <>
-         {/* console.log("email is",email); */}
+
         <div className="absolute my-44 w-3/12 mx-auto right-0 left-0 ">
+    
             <form onSubmit={(e)=>{e.preventDefault()}} className="flex flex-col  bg-black bg-opacity-90 px-16 py-8 items-center rounded-md">
                 <p className="text-white text-xl p-2  font-bold">
                     {newuser===true?" New User Signpup":"SingIn"}
@@ -131,7 +149,7 @@ const Form=()=>{
                 onClick={()=>{
                     googlevaildation();
                 }}
-                >Signup with  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQm8YyJuLna_s8bC0u8NCv_Gi51ejusYjzHsg&s"></img></p>
+                >Signup with google</p>
                 <button className="m-4 font-bold text-white rounded-md p-2 w-full  bg-red-800 "
                 onClick={()=>{
                     
