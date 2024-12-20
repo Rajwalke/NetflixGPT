@@ -145,6 +145,8 @@ const Form=()=>{
                 />
 
                 <p className="font-semibold text-xl text-red-500 my-2">{validationMessage}</p>
+                
+
                 <p className="text-sm text-white text-start cursor-pointer"
                 onClick={()=>{
                     googlevaildation();
