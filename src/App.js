@@ -43,8 +43,8 @@ useEffect(()=>{
   const auth = getAuth(app);
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      const {uid,email,displayName} = user;
-      appStore.dispatch(addUser({uid:uid,email:email,displayName:displayName}));
+      const {uid,email,displayName,photoURL} = user;
+      appStore.dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
       // nevigate("/browser");
 
       // ...

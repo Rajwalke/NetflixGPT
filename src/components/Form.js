@@ -6,23 +6,24 @@ import { validation } from "../utils/validationcondition.js";
 import app from "../utils/firebase.js";
 // import { useDispatch } from "react-redux";
 // import { addUser } from "../utils/userSlice.js";
-import { getAuth,signInWithPopup,GoogleAuthProvider , createUserWithEmailAndPassword ,signInWithEmailAndPassword} from "firebase/auth";
+import { getAuth,signInWithPopup,GoogleAuthProvider , createUserWithEmailAndPassword ,signInWithEmailAndPassword , sendEmailVerification} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
 // import { googleURL } from "../utils/image.js";
 // import { auth } from "../utils/firebase.js";
 const Form=()=>{
     // const dispatchItem=useDispatch(null);
     const [newuser,setnewuser]=useState(true);
-    const [username,setusername]=useState("");
+    // const [username,setusername]=useState("");
     const navigate=useNavigate();
     // const [email,setemail]=useState("");
     // const [password,setpassword]=useState("");
-    const [mobileno,setmobileno]=useState("")
+    // const [mobileno,setmobileno]=useState("")
     const [validationMessage,setvalidationMessage]=useState(null);
     const email=useRef(null);
     const password=useRef(null);
-
-    
+    const name=useRef(null);
+    const mobileno=useRef(null);
     const googlevaildation=()=>{
         const provider = new GoogleAuthProvider();
 
@@ -70,8 +71,32 @@ const Form=()=>{
                 // Signed up 
                 const user = userCredential.user;
                 console.log(user);
+                
+
+                
+                sendEmailVerification(user)
+                  .then(() => {
+                    // Email verification sent!
+                    // ...
+                  });
+                
+
+               
+                // const auth = getAuth();
+
+                //update the profile
+                updateProfile(user, {
+                  displayName: name.current.value , photoURL: "https://avatars.githubusercontent.com/u/138108763?v=4"
+                }).then(() => {
+                  navigate("/browser");
+                  // Profile updated!
+                  // ...
+                }).catch((error) => {
+                  // An error occurred
+                  // ...
+                });
                 // dispatchItem(addUser({uid:user.uid, email:user.email,apiKey:user.apiKey}));
-                navigate("/browser");
+                
                 console.log("naviagte to the browser");
                 // ...
               })
@@ -123,16 +148,13 @@ const Form=()=>{
                 <p className="text-white text-xl p-2  font-bold">
                     {newuser===true?" New User Signpup":"SingIn"}
                 </p>
-                {newuser === true && <input className="m-4  bg-gray-900 text-white rounded-md p-2 w-full block" value={username} type="text" placeholder="Enter Full Name"
-                onChange={(e)=>{
-                    setusername(e.target.value)
-                }}
-                /> }
-                {newuser === true && <input className="m-4  bg-gray-900 text-white rounded-md p-2 w-full block" value={mobileno} type="number" placeholder="Enter your mobile Number"
-                onChange={(e)=>{
-                    setmobileno(e.target.value)
-                }}
-                />}
+                {newuser === true && <input className="m-4  bg-gray-900 text-white rounded-md p-2 w-full block" 
+                 type="text" placeholder="Enter Full Name" ref={name}/>
+                }
+                {newuser ===true &&
+                <input className="m-4  bg-gray-900 text-white rounded-md p-2 w-full block" type="number"
+                 placeholder="Enter your mobile Number" ref={mobileno}/>
+                }
                 <input className="m-4   bg-gray-900 text-white rounded-md p-2 w-full block" type="email" placeholder="Enter your Email"
                 ref={email}
                 // onChange={(e)=>{
