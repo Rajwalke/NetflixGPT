@@ -9,9 +9,13 @@ import app from "../utils/firebase.js";
 import { getAuth,signInWithPopup,GoogleAuthProvider , createUserWithEmailAndPassword ,signInWithEmailAndPassword , sendEmailVerification} from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice.js";
+
 // import { googleURL } from "../utils/image.js";
 // import { auth } from "../utils/firebase.js";
 const Form=()=>{
+  const dispatch=useDispatch();
     // const dispatchItem=useDispatch(null);
     const [newuser,setnewuser]=useState(true);
     // const [username,setusername]=useState("");
@@ -88,6 +92,8 @@ const Form=()=>{
                 updateProfile(user, {
                   displayName: name.current.value , photoURL: "https://avatars.githubusercontent.com/u/138108763?v=4"
                 }).then(() => {
+                  const {uid,email,displayName,photoURL} = user;
+                  dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}))
                   navigate("/browser");
                   // Profile updated!
                   // ...
