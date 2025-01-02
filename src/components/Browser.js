@@ -1,8 +1,10 @@
 /* eslint-disable no-unused-vars */
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import app from "../utils/firebase";
 import { useSelector } from "react-redux";
+import { netflix_Logo } from "../utils/constant";
+import { useNavigate } from "react-router-dom";
 /* eslint-disable react/react-in-jsx-scope */
 const Browser=()=>{
     const nevigate=useNavigate();
@@ -21,12 +23,12 @@ const Browser=()=>{
         // <div>
      
             <div className="flex items-center justify-between p-5 z-50 w-full absolute bg-gradient-to-b from-gray-950">
-                <dv>
-                <img src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
+                <div>
+                <img src={netflix_Logo}
                 alt="logo-png"
                 className="pl-5 w-48 "
                 />
-                </dv>
+                </div>
                
                 <div className="flex items-center ">
                 <img className="w-14 rounded-full mr-5" alt="user profile" src={porfileUrl}/>

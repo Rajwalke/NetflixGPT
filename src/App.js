@@ -56,7 +56,7 @@ useEffect(()=>{
     }
   });
 
-},[])
+},[]);
 
   return (
     <Provider store={appStore}>

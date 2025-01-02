@@ -5,6 +5,7 @@ const Login=()=>{
         // <div className="absolute ">
         //     <Form/>
         // </div>
+        // eslint-disable-next-line react/react-in-jsx-scope
         <Form/>
     )
 }

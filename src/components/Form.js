@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice.js";
+import { user_Profile } from "../utils/constant.js";
 
 // import { googleURL } from "../utils/image.js";
 // import { auth } from "../utils/firebase.js";
@@ -64,7 +65,13 @@ const Form=()=>{
         const message=validation(email.current.value,password.current.value);
         console.log(message)
         setvalidationMessage(message);
-        if(validationMessage) return;
+        // if validation mesage is not null then return 
+        // else go to firebase authentication process
+        if(validationMessage!=null){
+          return ;
+        }
+        else{
+
         
         if(newuser){
             // sign up logic
@@ -90,7 +97,7 @@ const Form=()=>{
 
                 //update the profile
                 updateProfile(user, {
-                  displayName: name.current.value , photoURL: "https://avatars.githubusercontent.com/u/138108763?v=4"
+                  displayName: name.current.value , photoURL: user_Profile
                 }).then(() => {
                   const {uid,email,displayName,photoURL} = user;
                   dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}))
@@ -145,6 +152,7 @@ const Form=()=>{
 
         }
     }
+  }
     return(
         <>
 
