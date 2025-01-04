@@ -2,11 +2,17 @@
 // import { useNavigate } from "react-router-dom";
 import { getAuth, signOut } from "firebase/auth";
 import app from "../utils/firebase";
-import { useSelector } from "react-redux";
-import { netflix_Logo } from "../utils/constant";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import useMovieName from "../hooks/useMovieName";
+import { netflix_Logo } from "../utils/constant";
+import MainComponent from "./MainComponent";
+
+
+// import appStore from "../utils/appStore";
 /* eslint-disable react/react-in-jsx-scope */
 const Browser=()=>{
+    // const [mainMovie,setmainMovie]=useState(null);
     const nevigate=useNavigate();
     const nevigatetoForm=()=>{
         const auth = getAuth(app);
@@ -18,10 +24,18 @@ const Browser=()=>{
         });
         
     }
+   useMovieName();
+  
+//    if(movieFirst)return
+//    setmainMovie(movieFirst[0]);
+//    console.log("From Brwoser MovieFirst",movieFirst);
+//    
+    
     const porfileUrl=useSelector((store)=>store.user?.photoURL);
+    
     return(
-        // <div>
-     
+        <div>
+            
             <div className="flex items-center justify-between p-5 z-50 w-full absolute bg-gradient-to-b from-gray-950">
                 <div>
                 <img src={netflix_Logo}
@@ -38,7 +52,10 @@ const Browser=()=>{
                 </div>
                 
             </div>
-        // </div>
+            
+            <MainComponent/>
+            
+         </div>
     )
 }
 export default Browser;

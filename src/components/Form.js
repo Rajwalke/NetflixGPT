@@ -67,11 +67,7 @@ const Form=()=>{
         setvalidationMessage(message);
         // if validation mesage is not null then return 
         // else go to firebase authentication process
-        if(validationMessage!=null){
-          return ;
-        }
-        else{
-
+        if(validationMessage) return;
         
         if(newuser){
             // sign up logic
@@ -152,7 +148,6 @@ const Form=()=>{
 
         }
     }
-  }
     return(
         <>
 
