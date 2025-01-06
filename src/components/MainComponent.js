@@ -9,7 +9,7 @@ import TiltleInfo from "./TiltleInfo";
 const MainComponent=()=>{
     const movieFirst=useSelector((store)=>store.movie?.movieList);
     if(movieFirst === null) return;
-    const mainMovie=movieFirst[6];
+    const mainMovie=movieFirst[0];
     const {id,original_title,overview,poster_path}=mainMovie;
 
     return(
