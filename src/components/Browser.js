@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import useMovieName from "../hooks/useMovieName";
 import { netflix_Logo } from "../utils/constant";
 import MainComponent from "./MainComponent";
+import SecondaryComponent from "./SecondaryComponent";
 
 
 // import appStore from "../utils/appStore";
@@ -34,7 +35,7 @@ const Browser=()=>{
     const porfileUrl=useSelector((store)=>store.user?.photoURL);
     
     return(
-        <div>
+        <div className="bg-black">
             
             <div className="flex items-center justify-between p-5 z-50 w-full absolute bg-gradient-to-b from-gray-950">
                 <div>
@@ -54,7 +55,7 @@ const Browser=()=>{
             </div>
             
             <MainComponent/>
-            
+            <SecondaryComponent/>
          </div>
     )
 }

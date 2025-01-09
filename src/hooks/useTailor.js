@@ -10,13 +10,13 @@ const useTailor=(id)=>{
     const fetchdata= async ()=>{
         const apiData=await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, API_option);
         const jsonData=await apiData.json();
-        console.log("Json Data",jsonData);
+        // console.log("Json Data",jsonData);
         const filter=jsonData.results.filter((video)=>video?.type === "Trailer")
         dispatch(addTailor(filter[0]));
     }   
    useEffect(()=>{
     fetchdata();
-   },[])
+   },[id])
 
 }
 export default useTailor;
