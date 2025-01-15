@@ -9,6 +9,7 @@ import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import { useEffect } from "react";
 import app from "./utils/firebase";
+import GptPage from "./components/Gptpage";
 const App=()=> {
 
 //  const nevigate=useNavigate();
@@ -23,6 +24,10 @@ const App=()=> {
       {
         path:"/browser",
         element:<Browser/>
+      },
+      {
+        path:"/gptsearch",
+        element:<GptPage/>
       }
   ],
   {

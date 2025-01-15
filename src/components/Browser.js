@@ -8,8 +8,7 @@ import useMovieName from "../hooks/useMovieName";
 import { netflix_Logo } from "../utils/constant";
 import MainComponent from "./MainComponent";
 import SecondaryComponent from "./SecondaryComponent";
-
-
+import { Link } from "react-router-dom";
 // import appStore from "../utils/appStore";
 /* eslint-disable react/react-in-jsx-scope */
 const Browser=()=>{
@@ -37,7 +36,7 @@ const Browser=()=>{
     return(
         <div className="bg-black">
             
-            <div className="flex items-center justify-between p-5 z-50 w-full absolute bg-gradient-to-b from-gray-950">
+            <div className="flex items-center justify-between p-5 z-50 w-full absolute bg-gradient-to-b from-gray-950"> 
                 <div>
                 <img src={netflix_Logo}
                 alt="logo-png"
@@ -46,6 +45,9 @@ const Browser=()=>{
                 </div>
                
                 <div className="flex items-center ">
+                <Link to="/gptsearch"><p className="cursor-pointer bg-green-500 text-white font-bold mr-5 py-2 px-4 rounded hover:bg-green-600 transition duration-300 "
+
+                >GPT Search</p></Link>
                 <img className="w-14 rounded-full mr-5" alt="user profile" src={porfileUrl}/>
                 <p  className="cursor-pointer bg-red-500 text-white font-bold py-2 px-4 rounded hover:bg-red-600 transition duration-300 " onClick={()=>{
                    nevigatetoForm();
